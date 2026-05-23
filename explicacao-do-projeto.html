@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Explicação do Projeto — App de Previsão do Tempo com IA</title>
+<style>
+    :root {
+        --azul: #0e79fc;
+        --escuro: #1a1a2e;
+        --cinza: #555;
+        --fundo-codigo: #f4f6fb;
+        --borda: #e0e4ec;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        color: var(--escuro);
+        line-height: 1.6;
+        background: #fff;
+        font-size: 15px;
+    }
+
+    .pagina {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 48px 56px;
+    }
+
+    /* ----- Capa ----- */
+    .capa {
+        text-align: center;
+        padding: 80px 40px;
+        background: linear-gradient(135deg, #0e79fc, #1a1a2e);
+        color: #fff;
+        border-radius: 16px;
+        margin-bottom: 48px;
+    }
+    .capa h1 { font-size: 34px; margin-bottom: 12px; }
+    .capa p  { font-size: 17px; opacity: 0.9; }
+    .capa .emoji { font-size: 56px; display: block; margin-bottom: 16px; }
+
+    /* ----- Títulos ----- */
+    h2 {
+        font-size: 23px;
+        color: var(--azul);
+        margin: 38px 0 14px;
+        padding-bottom: 8px;
+        border-bottom: 3px solid var(--borda);
+    }
+    h3 {
+        font-size: 18px;
+        color: var(--escuro);
+        margin: 24px 0 10px;
+    }
+
+    p { margin: 10px 0; }
+
+    /* ----- Listas ----- */
+    ul, ol { margin: 10px 0 10px 26px; }
+    li { margin: 6px 0; }
+
+    /* ----- Código ----- */
+    code {
+        background: var(--fundo-codigo);
+        border: 1px solid var(--borda);
+        border-radius: 4px;
+        padding: 1px 6px;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+        color: #c0341d;
+    }
+    pre {
+        background: var(--escuro);
+        color: #e6e6e6;
+        padding: 16px 18px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 14px 0;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: inherit;
+    }
+
+    /* ----- Tabelas ----- */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+    }
+    th, td {
+        border: 1px solid var(--borda);
+        padding: 9px 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+    th { background: var(--fundo-codigo); color: var(--escuro); }
+    tr:nth-child(even) td { background: #fafbfd; }
+
+    /* ----- Caixas de destaque ----- */
+    .caixa {
+        border-left: 5px solid var(--azul);
+        background: var(--fundo-codigo);
+        padding: 14px 18px;
+        border-radius: 6px;
+        margin: 16px 0;
+    }
+    .caixa.alerta {
+        border-left-color: #e8a800;
+        background: #fff8e6;
+    }
+    .caixa.titulo-caixa { font-weight: bold; margin-bottom: 4px; }
+
+    .arquivo {
+        display: inline-block;
+        background: var(--escuro);
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 5px;
+        font-family: Consolas, monospace;
+        font-size: 13px;
+    }
+
+    footer {
+        margin-top: 48px;
+        padding-top: 18px;
+        border-top: 2px solid var(--borda);
+        text-align: center;
+        color: var(--cinza);
+        font-size: 13px;
+    }
+
+    /* ----- Impressão / Salvar como PDF ----- */
+    @media print {
+        body { font-size: 12pt; }
+        .pagina { padding: 0; max-width: 100%; }
+        .capa { page-break-after: always; }
+        h2 { page-break-after: avoid; }
+        pre, table, .caixa { page-break-inside: avoid; }
+        .instrucao-pdf { display: none; }
+    }
+
+    .instrucao-pdf {
+        background: #e8f3ff;
+        border: 1px dashed var(--azul);
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin-bottom: 32px;
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+<div class="pagina">
+
+    <div class="instrucao-pdf">
+        📄 <strong>Para salvar este documento em PDF:</strong> aperte
+        <code>Ctrl + P</code>, em "Destino" escolha <strong>"Salvar como PDF"</strong>
+        e clique em <strong>Salvar</strong>. (Esta caixa azul não aparece no PDF.)
+    </div>
+
+    <div class="capa">
+        <span class="emoji">🌦️</span>
+        <h1>App de Previsão do Tempo com IA</h1>
+        <p>Explicação completa de todos os arquivos do projeto</p>
+    </div>
+
+    <!-- ================= VISÃO GERAL ================= -->
+    <h2>1. Visão geral do projeto</h2>
+    <p>
+        Este é um <strong>aplicativo web de previsão do tempo</strong>. A pessoa
+        digita (ou fala) o nome de uma cidade e o app mostra a
+        <strong>temperatura</strong> e a <strong>umidade</strong> daquele lugar.
+        Além disso, há um botão que pede a uma <strong>inteligência artificial</strong>
+        uma sugestão de qual roupa usar com base no clima.
+    </p>
+
+    <h3>Como o projeto está organizado</h3>
+    <table>
+        <tr><th>Arquivo</th><th>Função</th></tr>
+        <tr><td><span class="arquivo">index.html</span></td><td>A estrutura da página (o "esqueleto").</td></tr>
+        <tr><td><span class="arquivo">styles.css</span></td><td>A aparência: cores, tamanhos, posições (a "roupa").</td></tr>
+        <tr><td><span class="arquivo">scripts.js</span></td><td>O comportamento: o que acontece ao clicar nos botões (o "cérebro").</td></tr>
+        <tr><td><span class="arquivo">img/lupa.svg</span></td><td>Ícone do botão de busca por texto.</td></tr>
+        <tr><td><span class="arquivo">img/microfone.svg</span></td><td>Ícone do botão de busca por voz.</td></tr>
+    </table>
+
+    <!-- ================= INDEX.HTML ================= -->
+    <h2>2. O arquivo index.html — a estrutura</h2>
+    <p>
+        O HTML monta os elementos visíveis da página. Os principais são:
+    </p>
+    <ul>
+        <li><strong>Campo de texto</strong> (<code>input-cidade</code>) — onde o usuário digita o nome da cidade. O <code>placeholder</code> é a dica em cinza ("Digite a cidade").</li>
+        <li><strong>Botão da lupa</strong> 🔍 — ao ser clicado, executa a função <code>cliqueiNoBotao()</code> para buscar o clima.</li>
+        <li><strong>Botão do microfone</strong> 🎤 — ao ser clicado, executa <code>detectaVoz()</code> para buscar o clima falando.</li>
+        <li><strong>Caixa de resultado</strong> (<code>caixa-media</code>) — começa vazia; é nela que o resultado aparece.</li>
+    </ul>
+    <p>
+        No final do arquivo, a linha <code>&lt;script src="scripts.js"&gt;&lt;/script&gt;</code>
+        conecta o HTML ao código JavaScript, dando "vida" à página.
+    </p>
+
+    <!-- ================= STYLES.CSS ================= -->
+    <h2>3. O arquivo styles.css — a aparência</h2>
+    <p>O CSS define como cada parte da página se parece. Pontos importantes:</p>
+    <ul>
+        <li><strong>Seletor <code>*</code></strong> — zera margens e espaçamentos de todos os elementos, para começar de um ponto neutro.</li>
+        <li><strong><code>body</code></strong> — coloca uma imagem de fundo (praia e montanhas) e usa <code>display: flex</code> para centralizar a caixa principal na tela.</li>
+        <li><strong><code>.caixa-maior</code></strong> — a caixa preta semitransparente. Usa <code>width: 90%</code> com <code>max-width: 450px</code>, o que a torna <em>responsiva</em>: se adapta ao celular e mantém um tamanho agradável no computador.</li>
+        <li><strong><code>.botao</code></strong> — botões redondos (<code>border-radius: 50%</code>) com efeito de crescer ao passar o mouse (<code>:hover</code>).</li>
+        <li><strong><code>.img-botao</code></strong> — define <code>height: 24px</code> e <code>width: auto</code>, garantindo que os ícones da lupa e do microfone fiquem do mesmo tamanho e proporcionais.</li>
+        <li><strong><code>.botao-ia</code></strong> — o botão azul que pede a sugestão de roupa para a IA.</li>
+    </ul>
+
+    <!-- ================= SCRIPTS.JS ================= -->
+    <h2>4. O arquivo scripts.js — o cérebro</h2>
+    <p>
+        É aqui que está toda a lógica. O arquivo começa com um comentário que
+        descreve o <strong>algoritmo</strong> — o passo a passo planejado antes de
+        programar. Existem três funções principais.
+    </p>
+
+    <h3>4.1 — função cliqueiNoBotao()</h3>
+    <p>Executada ao clicar na lupa. O passo a passo dela é:</p>
+    <ol>
+        <li>Pega o texto digitado no campo da cidade.</li>
+        <li>Monta o endereço (URL) do servidor de clima.</li>
+        <li>Usa <code>fetch()</code> para buscar os dados no servidor.</li>
+        <li>Converte a resposta para o formato <strong>JSON</strong> (um formato fácil de ler no JavaScript).</li>
+        <li>Escreve o resultado dentro da caixa usando <code>innerHTML</code>.</li>
+    </ol>
+    <div class="caixa">
+        <p class="titulo-caixa">Por que <code>async</code> e <code>await</code>?</p>
+        <p>
+            Buscar dados num servidor <strong>demora</strong>. A palavra
+            <code>await</code> ("espere") faz o código pausar até a resposta chegar,
+            evitando continuar com dados que ainda não existem. Toda função que usa
+            <code>await</code> precisa ser marcada como <code>async</code>.
+        </p>
+    </div>
+
+    <h3>4.2 — função detectaVoz()</h3>
+    <p>Executada ao clicar no microfone. Ela:</p>
+    <ol>
+        <li>Liga o reconhecimento de voz do navegador, no idioma português (<code>pt-BR</code>).</li>
+        <li>Ouve o que a pessoa fala e transforma em texto (transcrição).</li>
+        <li>Coloca esse texto no campo da cidade.</li>
+        <li>Chama automaticamente <code>cliqueiNoBotao()</code> para buscar o clima.</li>
+    </ol>
+
+    <h3>4.3 — função pedirSugestaoRoupa()</h3>
+    <p>Executada ao clicar no botão azul. Ela:</p>
+    <ol>
+        <li>Lê a temperatura, a umidade e a cidade que já estão na tela.</li>
+        <li>Envia esses dados para uma <strong>IA (Groq)</strong> com um pedido de sugestão de roupa.</li>
+        <li>Recebe a resposta da IA e a exibe na tela.</li>
+    </ol>
+    <p>A linha que mostra a resposta é:</p>
+    <pre><code>document.querySelector(".resposta-ai").innerHTML = dados.choices[0].message.content</code></pre>
+    <p>
+        Lê-se assim: "encontre o elemento <code>.resposta-ai</code> na página e
+        coloque dentro dele o texto da resposta da IA". O caminho
+        <code>dados.choices[0].message.content</code> navega dentro do objeto JSON
+        até chegar ao texto final.
+    </p>
+
+    <!-- ================= PONTOS DE ATENÇÃO ================= -->
+    <h2>5. Pontos de atenção (o que ainda falta arrumar)</h2>
+    <p>
+        O projeto está <strong>em construção</strong>. Os itens abaixo precisam ser
+        corrigidos para o app funcionar:
+    </p>
+    <table>
+        <tr><th>Arquivo</th><th>Problema</th><th>Correção</th></tr>
+        <tr><td>scripts.js</td><td>Chaves de API (<code>chave</code> e <code>chaveIA</code>) estão vazias.</td><td>Cadastrar nos sites OpenWeather e Groq e colar as chaves.</td></tr>
+        <tr><td>scripts.js</td><td>A variável <code>endereco</code> está vazia.</td><td>Montar a URL da API de clima com a cidade e a chave.</td></tr>
+        <tr><td>scripts.js</td><td><code>wabkitSpeechRecognition</code> está escrito errado.</td><td>O correto é <code>webkitSpeechRecognition</code>.</td></tr>
+        <tr><td>scripts.js</td><td>Tag de imagem: <code>src"..."</code> sem o sinal de igual.</td><td>Usar <code>src="..."</code> com o link do ícone.</td></tr>
+        <tr><td>scripts.js</td><td><code>onclick="pedirSugestaoRoupa"</code> sem parênteses.</td><td>Deve ser <code>onclick="pedirSugestaoRoupa()"</code>.</td></tr>
+        <tr><td>scripts.js</td><td>A função <code>pedirSugestaoRoupa</code> usa <code>await</code> mas não é <code>async</code>.</td><td>Adicionar <code>async</code> na frente da função.</td></tr>
+        <tr><td>scripts.js</td><td>A variável <code>cidade</code> está lendo <code>.umidade</code> por engano.</td><td>Deve ler o elemento <code>.cidade</code>.</td></tr>
+        <tr><td>scripts.js / css</td><td>O código procura <code>.resposta-ai</code>, mas o CSS tem <code>.resposta-ia</code>.</td><td>Padronizar o nome e criar o elemento no HTML.</td></tr>
+        <tr><td>styles.css</td><td><code>.caixa-madia</code> escrito errado.</td><td>O correto é <code>.caixa-media</code>.</td></tr>
+        <tr><td>styles.css</td><td><code>:houver</code> escrito errado.</td><td>O correto é <code>:hover</code>.</td></tr>
+    </table>
+
+    <div class="caixa alerta">
+        <p class="titulo-caixa">⚠️ Dica de segurança</p>
+        <p>
+            Chaves de API não devem ficar visíveis no código que vai para a
+            internet, pois qualquer pessoa poderia copiá-las e usá-las. Em projetos
+            de estudo isso é aceitável, mas em um app real elas devem ficar
+            protegidas em um servidor.
+        </p>
+    </div>
+
+    <!-- ================= RESUMO DO FLUXO ================= -->
+    <h2>6. Resumo do funcionamento</h2>
+    <pre><code>Usuário digita ou fala a cidade
+            │
+            ▼
+   cliqueiNoBotao()  ──►  busca o clima no servidor (fetch)
+            │
+            ▼
+   Mostra temperatura e umidade na tela
+            │
+            ▼
+   Usuário clica em "Sugestão de Roupa"
+            │
+            ▼
+   pedirSugestaoRoupa()  ──►  pergunta à IA (Groq)
+            │
+            ▼
+   Mostra a sugestão de roupa na tela</code></pre>
+
+    <footer>
+        Documento gerado para o projeto "App de Previsão do Tempo com IA" — 21/05/2026
+    </footer>
+
+</div>
+</body>
+</html>
